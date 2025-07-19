@@ -50,8 +50,12 @@ function animateCounters() {
             }
             
             // Format the number with trading precision
+            const isInteger = counter.getAttribute('data-integer') === 'true';
+            
             if (target >= 1000) {
                 counter.textContent = Math.floor(current).toLocaleString();
+            } else if (isInteger) {
+                counter.textContent = Math.floor(current);
             } else {
                 counter.textContent = current.toFixed(1);
             }
