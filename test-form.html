@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テストフォーム</title>
+</head>
+<body>
+    <h1>テストフォーム</h1>
+    
+    <form name="test" method="POST" data-netlify="true">
+        <p>
+            <label>お名前: <input type="text" name="name" required /></label>
+        </p>
+        <p>
+            <label>メール: <input type="email" name="email" required /></label>
+        </p>
+        <p>
+            <label>メッセージ: <textarea name="message" required></textarea></label>
+        </p>
+        <div data-netlify-recaptcha="true"></div>
+        <p>
+            <button type="submit">送信</button>
+        </p>
+    </form>
+    
+    <p><a href="index.html">トップページに戻る</a></p>
+</body>
+</html>
