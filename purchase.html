@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購入手続きページ - 相場計算機</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Section */
+        .header-section {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .security-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .security-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 25px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-size: 1.1rem;
+        }
+
+        /* Product Selection Section */
+        .selection-section {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #2980b9;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-card.recommended {
+            border-color: #ffd700;
+            background: linear-gradient(135deg, #fff9e6, #ffffff);
+        }
+
+        .product-card.recommended::before {
+            content: "最もお得";
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .product-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .product-price {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .price-main {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .price-original {
+            font-size: 1.2rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+
+        .price-save {
+            background: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .product-contents {
+            margin: 25px 0;
+        }
+
+        .contents-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2980b9;
+        }
+
+        .contents-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .contents-list li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .contents-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .sub-contents {
+            margin-left: 20px;
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .recommended-for {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .recommended-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2980b9;
+        }
+
+        .select-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .select-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .select-btn.recommended-btn {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .security-features {
+                gap: 15px;
+            }
+            
+            .security-item {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 20px;
+            }
+        }
+
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <section class="header-section">
+        <div class="container">
+            <h1 class="page-title fade-in">『相場計算機』ご購入手続きページ</h1>
+            <div class="security-features fade-in">
+                <div class="security-item">🔒 SSL暗号化通信対応</div>
+                <div class="security-item">✅ 安全な銀行振込決済</div>
+                <div class="security-item">📞 購入前のご相談も承ります</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Selection Section -->
+    <section class="selection-section">
+        <div class="container">
+            <h2 class="section-title fade-in">ご希望の商品をお選びください</h2>
+            
+            <div class="products-grid">
+                <!-- 相場計算機 単体 -->
+                <div class="product-card fade-in">
+                    <div class="product-icon">🎯</div>
+                    <h3 class="product-name">相場計算機 単体</h3>
+                    <div class="product-price">
+                        <div class="price-main">98,000円<span style="font-size: 1rem; color: #666;">（税込）</span></div>
+                    </div>
+                    
+                    <div class="product-contents">
+                        <div class="contents-title">内容：</div>
+                        <ul class="contents-list">
+                            <li>相場計算機 本体</li>
+                            <li>詳細マニュアル（1万文字以上）
+                                <div class="sub-contents">
+                                    ・完全図解インストールガイド<br>
+                                    ・6つの指標完全解説<br>
+                                    ・実践的な取引手法解説<br>
+                                    ・レベル別活用ガイド<br>
+                                    ・トラブルシューティング
+                                </div>
+                            </li>
+                            <li>メールサポート（永久無料）</li>
+                            <li>無料アップデート（永久対応）</li>
+                        </ul>
+                        
+                        <div class="recommended-for">
+                            <div class="recommended-title">こんな方におすすめ：</div>
+                            <ul class="contents-list">
+                                <li>AIレベルの分析力を手に入れたい</li>
+                                <li>本格的なトレードシステムを求めている</li>
+                                <li>詳細な取引手法まで学びたい</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <button class="select-btn" onclick="openModal('相場計算機 単体', '98,000円')">この商品を選択</button>
+                </div>
+
+                <!-- 相場判別君 単体 -->
+                <div class="product-card fade-in">
+                    <div class="product-icon">📊</div>
+                    <h3 class="product-name">相場判別君 単体</h3>
+                    <div class="product-price">
+                        <div class="price-main">29,800円<span style="font-size: 1rem; color: #666;">（税込）</span></div>
+                    </div>
+                    
+                    <div class="product-contents">
+                        <div class="contents-title">内容：</div>
+                        <ul class="contents-list">
+                            <li>相場判別君 本体</li>
+                            <li>設定・活用マニュアル（PDF）</li>
+                            <li>メールサポート（永久無料）</li>
+                            <li>無料アップデート（永久対応）</li>
+                        </ul>
+                        
+                        <div class="recommended-for">
+                            <div class="recommended-title">こんな方におすすめ：</div>
+                            <ul class="contents-list">
+                                <li>環境認識力を向上させたい</li>
+                                <li>相場の状態を正確に把握したい</li>
+                                <li>手頃な価格で始めたい</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <button class="select-btn" onclick="openModal('相場判別君 単体', '29,800円')">この商品を選択</button>
+                </div>
+
+                <!-- 完全セット -->
+                <div class="product-card recommended fade-in">
+                    <div class="product-icon">💎</div>
+                    <h3 class="product-name">完全セット</h3>
+                    <div class="product-price">
+                        <div class="price-original">通常価格：127,800円</div>
+                        <div class="price-main">109,800円<span style="font-size: 1rem; color: #666;">（税込）</span></div>
+                        <div class="price-save">18,000円お得！</div>
+                    </div>
+                    
+                    <div class="product-contents">
+                        <div class="contents-title">内容：</div>
+                        <ul class="contents-list">
+                            <li>相場計算機 本体</li>
+                            <li>相場判別君 本体</li>
+                            <li>特別統合マニュアル（1.5万文字）
+                                <div class="sub-contents">
+                                    ・両ツールの完全解説<br>
+                                    ・連携活用の極意<br>
+                                    ・プロ級の実践手法<br>
+                                    ・成功事例集
+                                </div>
+                            </li>
+                            <li>優先メールサポート</li>
+                            <li>無料アップデート（永久対応）</li>
+                        </ul>
+                        
+                        <div class="recommended-for">
+                            <div class="recommended-title">こんな方におすすめ：</div>
+                            <ul class="contents-list">
+                                <li>本気で勝ちトレーダーを目指す</li>
+                                <li>環境認識＋エントリー精度を両立したい</li>
+                                <li>最高の投資効果を得たい</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <button class="select-btn recommended-btn" onclick="openModal('完全セット', '109,800円')">この商品を選択</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Purchase Modal -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="margin-bottom: 30px; color: #2980b9;">ご購入申し込みフォーム</h2>
+            
+            <form id="purchaseForm" name="purchase" method="POST" data-netlify="true" action="/thank-you.html">
+                <div class="form-group">
+                    <label class="form-label">選択商品</label>
+                    <select id="productSelect" name="product" class="form-select" required>
+                        <option value="">商品を選択してください</option>
+                        <option value="相場計算機 単体">相場計算機 単体 - 98,000円</option>
+                        <option value="相場判別君 単体">相場判別君 単体 - 29,800円</option>
+                        <option value="完全セット">完全セット - 109,800円</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">お名前（必須）</label>
+                    <input type="text" id="customerName" name="name" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">メールアドレス（必須）</label>
+                    <input type="email" id="customerEmail" name="email" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">MT4口座番号（必須）</label>
+                    <input type="text" id="mt4Account" name="mt4_account" class="form-input" placeholder="例：12345678" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">ご要望・質問など（任意）</label>
+                    <textarea id="customerMessage" name="message" class="form-textarea" rows="4" placeholder="ご質問やご要望があればお聞かせください"></textarea>
+                </div>
+
+                <!-- Netlify bot protection -->
+                <div style="display: none;">
+                    <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                </div>
+                
+                <button type="submit" class="submit-btn">購入申し込みを送信</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        function openModal(productName, price) {
+            const modal = document.getElementById('purchaseModal');
+            const productSelect = document.getElementById('productSelect');
+            
+            // Set the selected product
+            if (productName === '相場計算機 単体') {
+                productSelect.value = '相場計算機 単体';
+            } else if (productName === '相場判別君 単体') {
+                productSelect.value = '相場判別君 単体';
+            } else if (productName === '完全セット') {
+                productSelect.value = '完全セット';
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('purchaseModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('purchaseModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Form submission (Netlify handles the actual submission)
+        // No custom JavaScript needed for form submission
+
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

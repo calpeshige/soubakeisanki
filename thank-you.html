@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>送信完了 - 相場計算機</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .thank-you-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #27ae60;
+            margin-bottom: 30px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .message-box {
+            background: #f8f9fa;
+            border-left: 5px solid #27ae60;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .message-title {
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .message-text {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .next-steps {
+            background: #e8f5e8;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .next-steps-title {
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .next-steps-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .next-steps-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+
+        .next-steps-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+            color: white;
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #ecf0f1;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .thank-you-card {
+                padding: 30px 25px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="thank-you-card">
+            <div class="success-icon">✅</div>
+            <h1 class="title">送信完了！</h1>
+            <p class="subtitle">お申し込み・お問い合わせありがとうございます</p>
+            
+            <div class="message-box">
+                <div class="message-title">📧 確認メールを送信いたします</div>
+                <div class="message-text">
+                    ご入力いただいたメールアドレス宛に、確認メールをお送りいたします。<br>
+                    24時間以内に必ずご返信いたしますので、しばらくお待ちください。
+                </div>
+            </div>
+            
+            <div class="next-steps">
+                <div class="next-steps-title">今後の流れ</div>
+                <ul class="next-steps-list">
+                    <li>24時間以内にご連絡いたします</li>
+                    <li>お支払い方法をご案内いたします</li>
+                    <li>ご入金確認後、商品をお送りします</li>
+                    <li>設定サポートも承っております</li>
+                </ul>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="index.html" class="btn btn-primary">🏠 トップページに戻る</a>
+                <a href="contact.html" class="btn btn-secondary">💬 追加でお問い合わせ</a>
+            </div>
+            
+            <div class="contact-info">
+                <strong>緊急のお問い合わせ:</strong><br>
+                binarysignaltoollabo@gmail.com<br>
+                ※迷惑メールフォルダもご確認ください
+            </div>
+        </div>
+    </div>
+</body>
+</html>
