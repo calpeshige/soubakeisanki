@@ -471,7 +471,15 @@
     <div id="purchaseModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h2 style="margin-bottom: 30px; color: #2980b9;">ご購入申し込みフォーム</h2>
+            <h2 style="margin-bottom: 20px; color: #2980b9;">ご購入申し込みフォーム</h2>
+            <div style="background: #e8f4fd; padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 4px solid #3498db;">
+                <div style="font-weight: bold; color: #2980b9; margin-bottom: 10px;">📧 お申し込み後の流れ</div>
+                <ul style="margin: 10px 0; padding-left: 20px; color: #555;">
+                    <li>お申し込み確認後、<strong>メールで詳しい購入方法をご返信</strong>いたします</li>
+                    <li>お支払い方法（銀行振込等）を詳しくご案内いたします</li>
+                    <li>ご入金確認後、商品をお送りいたします</li>
+                </ul>
+            </div>
             
             <form id="purchaseForm" name="purchase" method="POST" data-netlify="true">
                 <div class="form-group">
@@ -497,6 +505,10 @@
                 <div class="form-group">
                     <label class="form-label">MT4口座番号（必須）</label>
                     <input type="text" id="mt4Account" name="mt4_account" class="form-input" placeholder="例：12345678" required>
+                    <div style="background: #fff3cd; padding: 12px; border-radius: 6px; margin-top: 8px; font-size: 0.9rem; color: #856404; border-left: 3px solid #ffc107;">
+                        <strong>⚠️ 重要：</strong> 商品は入力されたMT4口座番号に紐づけされます。<br>
+                        <strong>1アカウントでのみ使用可能</strong>ですので、間違いのないようご入力ください。
+                    </div>
                 </div>
 
                 <div class="form-group">
