@@ -275,6 +275,297 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* Chart Lines Animation */
+.chart-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.chart-lines::before,
+.chart-lines::after {
+    content: '';
+    position: absolute;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+    height: 2px;
+    width: 100%;
+    animation: chartMove 3s linear infinite;
+}
+
+.chart-lines::before {
+    top: 30%;
+    animation-delay: 0s;
+}
+
+.chart-lines::after {
+    top: 70%;
+    animation-delay: 1.5s;
+    background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.3), transparent);
+}
+
+@keyframes chartMove {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Random Numbers Animation */
+.random-numbers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.random-numbers::before {
+    content: attr(data-numbers);
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: rgba(255, 215, 0, 0.4);
+    white-space: pre-line;
+    animation: numbersFloat 8s ease-in-out infinite;
+    top: 20%;
+    left: 10%;
+}
+
+.random-numbers::after {
+    content: '1.2340\A1.2341\A1.2342\A1.2339\A1.2344';
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: rgba(52, 152, 219, 0.4);
+    white-space: pre-line;
+    animation: numbersFloat 8s ease-in-out infinite;
+    animation-delay: 4s;
+    top: 60%;
+    right: 15%;
+}
+
+@keyframes numbersFloat {
+    0%, 100% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+}
+
+/* Matrix Effect */
+.matrix-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.matrix-effect::before {
+    content: '010101010101010101010101010101010101010101';
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    color: rgba(39, 174, 96, 0.2);
+    letter-spacing: 2px;
+    animation: matrixRain 6s linear infinite;
+    top: -50px;
+    left: 5%;
+}
+
+.matrix-effect::after {
+    content: '101010101010101010101010101010101010101010';
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    color: rgba(39, 174, 96, 0.15);
+    letter-spacing: 2px;
+    animation: matrixRain 6s linear infinite;
+    animation-delay: 3s;
+    top: -50px;
+    right: 8%;
+}
+
+@keyframes matrixRain {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Pulse Effect for Cards */
+.pricing-card,
+.weapon-card,
+.solution-card {
+    animation: subtlePulse 4s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+    0%, 100% {
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    50% {
+        box-shadow: 0 12px 35px rgba(0,0,0,0.15), 0 0 20px rgba(255, 215, 0, 0.1);
+    }
+}
+
+/* Scanning Line Effect */
+@keyframes scan {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.8), transparent);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    animation: scan 4s ease-in-out infinite;
+    z-index: 1;
+    animation-delay: 1s;
+}
+
+/* Glitch Effect for Title */
+.hero-title {
+    position: relative;
+}
+
+.hero-title::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: rgba(255, 0, 0, 0.7);
+    animation: glitch1 2s infinite;
+    z-index: -1;
+}
+
+.hero-title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: rgba(0, 255, 255, 0.7);
+    animation: glitch2 2s infinite;
+    z-index: -1;
+}
+
+@keyframes glitch1 {
+    0%, 90%, 100% {
+        transform: translate(0);
+        opacity: 0;
+    }
+    95% {
+        transform: translate(2px, 1px);
+        opacity: 0.3;
+    }
+}
+
+@keyframes glitch2 {
+    0%, 90%, 100% {
+        transform: translate(0);
+        opacity: 0;
+    }
+    95% {
+        transform: translate(-1px, -1px);
+        opacity: 0.3;
+    }
+}
+
+/* Holographic Effect */
+.btn-primary {
+    background: linear-gradient(45deg, #3498db, #2980b9, #8e44ad, #3498db);
+    background-size: 300% 300%;
+    animation: holographic 3s ease infinite;
+}
+
+@keyframes holographic {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Breathing Effect for Important Elements */
+.product-name,
+.price-box {
+    animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* Cyber Grid Effect */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+    z-index: 0;
+}
+
+@keyframes gridMove {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(50px, 50px);
+    }
+}
+
 .animated-particles::before {
     background: var(--accent-gold);
     top: -200px;
