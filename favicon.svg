@@ -1,0 +1,29 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#1a1a2e"/>
+  
+  <!-- Calculator icon with chart elements -->
+  <!-- Calculator body -->
+  <rect x="6" y="8" width="20" height="16" rx="2" fill="#ffd700" stroke="#daa520" stroke-width="0.5"/>
+  
+  <!-- Display screen -->
+  <rect x="8" y="10" width="16" height="4" rx="1" fill="#1a1a2e"/>
+  
+  <!-- Chart line on screen -->
+  <polyline points="9,12.5 11,11.5 13,12 15,11 17,10.5 19,11.5 21,11 23,12" 
+            stroke="#00ff00" stroke-width="0.8" fill="none"/>
+  
+  <!-- Calculator buttons (simplified) -->
+  <circle cx="10" cy="17" r="1.2" fill="#1a1a2e"/>
+  <circle cx="14" cy="17" r="1.2" fill="#1a1a2e"/>
+  <circle cx="18" cy="17" r="1.2" fill="#1a1a2e"/>
+  <circle cx="22" cy="17" r="1.2" fill="#1a1a2e"/>
+  
+  <circle cx="10" cy="20" r="1.2" fill="#1a1a2e"/>
+  <circle cx="14" cy="20" r="1.2" fill="#1a1a2e"/>
+  <circle cx="18" cy="20" r="1.2" fill="#1a1a2e"/>
+  <circle cx="22" cy="20" r="1.2" fill="#1a1a2e"/>
+  
+  <!-- Trend arrow -->
+  <path d="M24 6 L28 6 L28 10 M24 10 L28 6" stroke="#00ff00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>
