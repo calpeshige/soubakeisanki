@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Forms for Netlify Detection</title>
+</head>
+<body style="display: none;">
+    <!-- Purchase Form -->
+    <form name="purchase" method="POST" data-netlify="true">
+        <input type="text" name="name" placeholder="お名前" required />
+        <input type="email" name="email" placeholder="メールアドレス" required />
+        <input type="text" name="mt4_account" placeholder="MT4口座番号" required />
+        <select name="product" required>
+            <option value="">商品を選択してください</option>
+            <option value="相場計算機 単体">相場計算機 単体 - 98,000円</option>
+            <option value="相場判別君 単体">相場判別君 単体 - 29,800円</option>
+            <option value="完全セット">完全セット - 109,800円</option>
+        </select>
+        <textarea name="message" placeholder="ご要望・質問など"></textarea>
+        <button type="submit">送信</button>
+    </form>
+
+    <!-- Contact Form -->
+    <form name="contact" method="POST" data-netlify="true">
+        <input type="text" name="name" placeholder="お名前" required />
+        <input type="email" name="email" placeholder="メールアドレス" required />
+        <select name="type">
+            <option value="">選択してください</option>
+            <option value="商品について">商品について</option>
+            <option value="購入前の相談">購入前の相談</option>
+            <option value="技術的な質問">技術的な質問</option>
+            <option value="サポート">サポート</option>
+            <option value="その他">その他</option>
+        </select>
+        <textarea name="message" placeholder="お問い合わせ内容" required></textarea>
+        <button type="submit">送信</button>
+    </form>
+</body>
+</html>
