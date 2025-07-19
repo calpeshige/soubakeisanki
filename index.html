@@ -706,6 +706,36 @@
         </div>
     </footer>
 
+    <!-- Hidden forms for Netlify detection -->
+    <div style="display: none;">
+        <!-- Purchase form for Netlify -->
+        <form name="purchase" data-netlify="true">
+            <input type="text" name="name" />
+            <input type="email" name="email" />
+            <input type="text" name="mt4_account" />
+            <select name="product">
+                <option value="相場計算機 単体">相場計算機 単体</option>
+                <option value="相場判別君 単体">相場判別君 単体</option>
+                <option value="完全セット">完全セット</option>
+            </select>
+            <textarea name="message"></textarea>
+        </form>
+        
+        <!-- Contact form for Netlify -->
+        <form name="contact" data-netlify="true">
+            <input type="text" name="name" />
+            <input type="email" name="email" />
+            <select name="type">
+                <option value="商品について">商品について</option>
+                <option value="購入前の相談">購入前の相談</option>
+                <option value="技術的な質問">技術的な質問</option>
+                <option value="サポート">サポート</option>
+                <option value="その他">その他</option>
+            </select>
+            <textarea name="message"></textarea>
+        </form>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
